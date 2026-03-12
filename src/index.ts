@@ -279,6 +279,15 @@ export function buildUrl(
   return url;
 }
 
+export function extractPathSegments(url: string): string[] {
+  try {
+    const parsed = new URL(url);
+    return parsed.pathname.split('/').filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
 export function parseQueryParams(url: string): Record<string, string> {
   try {
     const parsed = new URL(url);
