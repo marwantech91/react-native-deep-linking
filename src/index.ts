@@ -111,6 +111,10 @@ export class DeepLinkRouter {
     this.listenerRemover = null;
   }
 
+  getRegisteredPatterns(): string[] {
+    return this.routes.map(route => route.pattern);
+  }
+
   private parseUrl(urlString: string): URL | null {
     try {
       // Handle custom schemes
