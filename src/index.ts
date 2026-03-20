@@ -115,6 +115,14 @@ export class DeepLinkRouter {
     return this.routes.map(route => route.pattern);
   }
 
+  hasRoute(pattern: string): boolean {
+    return this.routes.some(route => route.pattern === pattern);
+  }
+
+  get routeCount(): number {
+    return this.routes.length;
+  }
+
   private parseUrl(urlString: string): URL | null {
     try {
       // Handle custom schemes
