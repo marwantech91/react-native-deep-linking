@@ -300,6 +300,15 @@ export function extractPathSegments(url: string): string[] {
   }
 }
 
+/** Checks whether a URL string matches a given deep link scheme (e.g. "myapp"). */
+export function matchesScheme(url: string, scheme: string): boolean {
+  try {
+    return url.toLowerCase().startsWith(`${scheme.toLowerCase()}://`);
+  } catch {
+    return false;
+  }
+}
+
 export function parseQueryParams(url: string): Record<string, string> {
   try {
     const parsed = new URL(url);
