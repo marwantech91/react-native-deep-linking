@@ -309,6 +309,12 @@ export function matchesScheme(url: string, scheme: string): boolean {
   }
 }
 
+/** Extract the scheme portion from a URL string (e.g. "https" from "https://example.com") */
+export function getSchemeFromUrl(url: string): string | null {
+  const match = url.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):\/\//);
+  return match ? match[1].toLowerCase() : null;
+}
+
 export function parseQueryParams(url: string): Record<string, string> {
   try {
     const parsed = new URL(url);
