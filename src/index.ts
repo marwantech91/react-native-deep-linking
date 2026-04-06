@@ -328,5 +328,31 @@ export function parseQueryParams(url: string): Record<string, string> {
   }
 }
 
+/** Build a deep link URL with path parameter substitution */
+export function buildDeepLink(
+  scheme: string,
+  host: string,
+  pattern: string,
+  params: Record<string, string | number>,
+  query?: Record<string, string | number>
+): string {
+  let path = pattern;
+  for (const [key, value] of Object.entries(params)) {
+    path = path.replace(`:${key}`, String(value));
+  }
+
+  let url = `${scheme}://${host}${path}`;
+
+  if (query) {
+    const searchParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(query)) {
+      searchParams.append(key, String(value));
+    }
+    url += `?${searchParams.toString()}`;
+  }
+
+  return url;
+}
+
 export default DeepLinkRouter;
 export type { RouteParams, RouteHandler, DeepLinkRouterOptions };
